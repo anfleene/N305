@@ -1,7 +1,7 @@
 /*
 *Andrew Fleener
-*Project 2
-*2/07/10
+*Project 3
+*2/20/10
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -106,8 +106,9 @@ void fact_input(){
 }
 
 char choice(){
-	char input;
-	scanf("%c", &input);
+	char input = '\n';
+	while(input == '\n')
+		scanf("%c", &input)	;
 	return input;
 }
 
@@ -128,9 +129,6 @@ void main_loop(){
 		print_menu();
 		menu_choice = choice();
 		switch(menu_choice){
-			case '\n':
-				menu_choice = choice();
-				break;				
 			case '1':
 				add_input();
 				break;
@@ -155,6 +153,8 @@ void main_loop(){
 			case 'q':
 			case 'Q':
 				exit(EXIT_SUCCESS);
+				break;
+			case '\n':
 				break;
 			default:
 				printf("\n\n\n");
