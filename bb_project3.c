@@ -1,7 +1,9 @@
 /*
 *Andrew Fleener
-*Project 3
+*Black Belt Project 3
 *2/20/10
+*gcd method copied from http://nob.cs.ucdavis.edu/classes/ecs030-2002-02/code/gcdr.c
+*other recursive algorithms were developed without any help
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,11 +55,9 @@ void divide_input(){
 }
 
 int expo(int i, int j){
-	int return_val = 1;
-	int k;
-	for(k=0; k < j; k++)
-		return_val *= i;
-	return return_val;
+	if(j == 0)
+		return 1;
+	return expo(i, j-1) * i;
 }
 
 void expo_input(){
@@ -65,25 +65,18 @@ void expo_input(){
 	printf("Input two positive integers first the base and then the exponent:(seperated with a comma ex: 1,2)\n");
 	scanf("%d, %d", &i, &j);
 	if(i < 0 || j < 0){
-		printf("The Values must be positive");
+		printf("The Values must be positive\n");
 	}else{
 		printf("%d^%d = %d\n", i, j, expo(i,j));	
 	}
 }
 
 int gcd(int i, int j){
-	int temp;
-	if (i < j){
-		i = temp;
-		i = j; 
-		j = temp;
-	}
-	while(j != 0){
-		temp = i % j;
-		i = j;
-		j = temp;
-	}
-	return i;
+	if(i == 0)
+		return j;
+	if(j == 0)
+		return i;		
+	return gcd(j, i % j);
 }
 
 void gcd_input(){
@@ -101,11 +94,9 @@ void gcd_input(){
 
 
 int fact(int i){
-	int fact = i;
-	int j;
-	for(j=i-1; j > 0; j--)
-		fact *= j;
-	return fact;
+	if(i == 1)
+		return i;
+	return fact(i-1) * i;
 }
 
 void fact_input(){
